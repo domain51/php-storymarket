@@ -7,7 +7,7 @@ class Storymarket_ClientTest extends StorymarketTestCase {
         $url = '/content/' . rand(10, 20) . '/';
         $expected_return = 'some randomly generated return' . rand(1000, 2000);
 
-        $client = $this->getMock('Storymarket_Client', array('request'));
+        $client = $this->getMock('Storymarket_Client', array('request'), array($this->getMockApi()));
         $client->expects($this->once())
             ->method('request')
             ->with($url, strtoupper($method))
@@ -33,4 +33,24 @@ class Storymarket_ClientTest extends StorymarketTestCase {
         $this->assertExpectedDispatch('delete');
     }
 
+    public function test_has_a_userAgent_property() {
+        $client = new Storymarket_Client($this->getMockApi());
+        $this->assertTrue(isset($client->userAgent));
+    }
+
+    public function test_userAgent_property_is_equal_to_php_storymarket_plus_current_version() {
+        $client = new Storymarket_Client($this->getMockApi());
+        $this->assertEquals('php-storymarket/' . Storymarket::VERSION, $client->userAgent);
+    }
+
+    public function test_has_baseUrl_property() {
+        $client = new Storymarket_Client($this->getMockApi());
+        $this->assertTrue(isset($client->baseUrl));
+    }
+
+    public function test_baseUrl_is_set_to_storymarket_url() {
+        $client = new Storymarket_Client($this->getMockApi());
+        $this->assertEquals('http://storymarket.com/api/v1', $client->baseUrl);
+    }
 }
+
