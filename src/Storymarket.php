@@ -7,6 +7,8 @@ function _storymarket_autoloader($class) {
 spl_autoload_register(_storymarket_autoloader);
 
 class Storymarket {
+    const VERSION = '0.1.0';
+
     public $api_key = null;
     public $client = null;
 
