@@ -7,7 +7,9 @@ require_once dirname(dirname(dirname(__FILE__))) . '/Storymarket/Base/ResourceTe
 class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function setUp() {
         $this->randomUrlBit = 'rand_' . rand(10, 20);
-        $this->handler = $this->getMock('Storymarket_RequestHandler');
+        $this->api = $this->getMockApi();
+        $this->handler = $this->api->handler = $this->getMock('Storymarket_RequestHandler', array(),
+            array($this->api));
         $this->baseUrl = '/content/' . $this->randomUrlBit . '/';
     }
 
@@ -20,7 +22,7 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function createContentManager() {
-        return new Storymarket_Content_ContentManager($this->handler, $this->randomUrlBit);
+        return new Storymarket_Content_ContentManager($this->api, $this->randomUrlBit);
     }
 
     public function assertMethodReturnsAsExpected($method, $handlerMethod, $args=array()) {
@@ -41,16 +43,6 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
 
         $manager = $this->createContentManager();
         call_user_func_array(array($manager, $method), $args);
-    }
-
-    public function test_constructs_real_requestHandler_if_none_provided() {
-        $manager = new Storymarket_Content_ContentManager();
-        $reflection = new ReflectionObject($manager);
-        $this->assertTrue($reflection->hasProperty('_handler'));
-        $property = $reflection->getProperty('_handler');
-        $property->setAccessible(true);
-        $defaultValue = $property->getValue($manager);
-        $this->assertType(Storymarket_RequestHandler, $defaultValue);
     }
 
     public function test_all_dispatches_to_doList() {
