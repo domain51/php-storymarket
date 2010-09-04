@@ -24,5 +24,9 @@ abstract class Storymarket_Base_Resource
     public function get() {
         return $this->manager->get($this->id);
     }
+
+    public function toArray() {
+        return $this->_info;
+    }
 }
 

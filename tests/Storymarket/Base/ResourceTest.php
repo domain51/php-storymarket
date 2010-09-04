@@ -33,5 +33,11 @@ class Storymarket_Base_ResourceTest extends StorymarketTestCase {
         $resource = new TestableResource($manager, array());
         $this->assertEquals($random_value, $resource->get());
     }
+
+    public function test_toArray_returns_raw_array() {
+        $randomArray = array('id' => rand(100, 200));
+        $resource = new TestableResource($this->getManagerStub(), $randomArray);
+        $this->assertEquals($randomArray, $resource->toArray());
+    }
 }
 
