@@ -43,6 +43,16 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         call_user_func_array(array($manager, $method), $args);
     }
 
+    public function test_constructs_real_requestHandler_if_none_provided() {
+        $manager = new Storymarket_Content_ContentManager();
+        $reflection = new ReflectionObject($manager);
+        $this->assertTrue($reflection->hasProperty('_handler'));
+        $property = $reflection->getProperty('_handler');
+        $property->setAccessible(true);
+        $defaultValue = $property->getValue($manager);
+        $this->assertType(Storymarket_RequestHandler, $defaultValue);
+    }
+
     public function test_all_dispatches_to_doList() {
         $this->assertMethodDispatchesAsExpected('all', 'doList');
     }

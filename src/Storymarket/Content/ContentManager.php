@@ -1,11 +1,11 @@
 <?php
 
 class Storymarket_Content_ContentManager {
-    private $_handler = null;
+    protected $_handler = null;
     protected $_url_bit = null;
 
-    public function __construct($handler, $url_bit) {
-        $this->_handler = $handler;
+    public function __construct($handler=null, $url_bit=null) {
+        $this->_handler = $handler ? $handler : new Storymarket_RequestHandler();
         $this->_url_bit = $url_bit;
     }
 
