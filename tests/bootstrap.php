@@ -14,6 +14,11 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
         return $this->getMock('Storymarket', array(), array('123'));
     }
 
+    public function getMockClient($api = null) {
+        return $this->getMock('Storymarket_Client', array(),
+            array((empty($api) ? $this->getMockApi() : $api)));
+    }
+
     public function getManagerStub() {
         return $this->getMock('Storymarket_Base_Manager', array(), array($this->getMockApi()));
     }

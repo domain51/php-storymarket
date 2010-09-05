@@ -8,8 +8,8 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function setUp() {
         $this->randomUrlBit = 'rand_' . rand(10, 20);
         $this->api = $this->getMockApi();
-        $this->handler = $this->api->handler = $this->getMock('Storymarket_RequestHandler', array(),
-            array($this->api));
+        $this->handler = $this->getMock('Storymarket_RequestHandler', array(),
+            array($this->api, 'Storymarket_Base_Resource'));
         $this->baseUrl = '/content/' . $this->randomUrlBit . '/';
     }
 
@@ -22,7 +22,8 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function createContentManager() {
-        return new Storymarket_Content_ContentManager($this->api, $this->randomUrlBit);
+        return new Storymarket_Content_ContentManager(
+            $this->api, $this->handler, $this->randomUrlBit);
     }
 
     public function assertMethodReturnsAsExpected($method, $handlerMethod, $args=array()) {

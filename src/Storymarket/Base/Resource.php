@@ -7,7 +7,7 @@
  *       an associative array.  Not implementing in first pass, will later if
  *       it is requested.
  */
-abstract class Storymarket_Base_Resource
+class Storymarket_Base_Resource
 {
     public function __construct(Storymarket_Base_Manager $manager, $info) {
         $this->manager = $manager;
