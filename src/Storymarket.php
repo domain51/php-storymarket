@@ -2,7 +2,8 @@
 
 // TODO: handle SPL autoload failure gracefully
 function _storymarket_autoloader($class) {
-    require str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+    // fail silently if we can't find it, PHP will complain in a minute
+    @include str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 }
 spl_autoload_register(_storymarket_autoloader);
 
@@ -18,7 +19,7 @@ class Storymarket {
 
         $this->audio = new Storymarket_Content_AudioManager($this);
         $this->categories = new Storymarket_Content_CategoryManager($this);
-        $this->data = new Storymarket_Content_Data($this);
+        $this->data = new Storymarket_Content_DataManager($this);
         $this->orgs = new Storymarket_Orgs_OrgManager($this);
         $this->photos = new Storymarket_Content_PhotoManager($this);
         $this->pricing = new Storymarket_Schemes_PricingSchemeManager($this);
