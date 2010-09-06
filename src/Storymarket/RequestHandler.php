@@ -34,5 +34,10 @@ class Storymarket_RequestHandler {
     }
 
     public function doUploadFile($url, $file) {
+        # TODO: check for file existence,
+        $data = array(
+            'blob' => base64_encode(file_get_contents($file)),
+        );
+        $this->api->client->put($url, $data);
     }
 }

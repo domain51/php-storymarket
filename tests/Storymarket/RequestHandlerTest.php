@@ -100,5 +100,22 @@ class Storymarket_RequestHandlerTest extends StorymarketTestCase {
         $handler = new Storymarket_RequestHandler($api, $this->getManagerStub());
         $handler->doUpdate($url, $body);
     }
+
+    public function test_doUploadFile_calls_put_with_provided_file_as_blob() {
+        $testFileLocation = STORYMARKET_TEST_PATH . '/support/logo.png';
+        $body = array('id' => rand(100, 200));
+        $url = '/content/' . $body['id'] . '/blob/';
+
+        $data = array('blob' => base64_encode(file_get_contents($testFileLocation)));
+
+        $api = $this->getMockApi();
+        $api->client = $this->getMockClient($api);
+        $api->client->expects($this->once())
+            ->method('put')
+            ->with($url, $data);
+
+        $handler = new Storymarket_RequestHandler($api, $this->getManagerStub());
+        $handler->doUploadFile($url, $testFileLocation);
+    }
 }
 
