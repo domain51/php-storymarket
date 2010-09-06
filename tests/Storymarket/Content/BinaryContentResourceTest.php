@@ -11,11 +11,11 @@ class Storymarket_Content_BinaryContentResourceTest extends StorymarketTestCase 
         $manager = $this->getMock('Storymarket_Content_BinaryContentManager', array(),
             array($this->getMockApi(), 'Storymarket_Content_BinaryContentResource')
         );
+        $binary = new Storymarket_Content_BinaryContentResource($manager, array());
         $manager->expects($this->once())
             ->method('uploadFile')
-            ->with($this->testFileLocation);
+            ->with($binary, $this->testFileLocation);
 
-        $binary = new Storymarket_Content_BinaryContentResource($manager, array());
         $binary->uploadFile($this->testFileLocation);
     }
 }

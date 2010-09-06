@@ -32,4 +32,7 @@ class Storymarket_RequestHandler {
     public function doUpdate($url, $data) {
         $this->api->client->put($url, $data);
     }
+
+    public function doUploadFile($url, $file) {
+    }
 }
