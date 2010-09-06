@@ -32,41 +32,10 @@ abstract class Storymarket_Base_Manager
         $this->_api = $api;
     }
 
-    /**
-     * @todo document
-     */
     abstract public function all();
-
-    /**
-     * @todo document
-     */
-    abstract public function get();
-
-    protected function _list($url) {
-        list($response, $body) = $this->api->client->get($url);
-        $ret = array();
-        foreach ($body as $res) {
-            $ret[] = new $this->_resource_class($this, $res);
-        }
-        return $ret;
-    }
-
-    protected function _get($url) {
-        list($response, $body) = $this->api->client->get($url);
-        return new $this->_resource_class($this, $body);
-    }
-
-    protected function _create($url, $body) {
-        list($response, $body) = $this->api->client->post($url, $body);
-        return new $this->_resource_class($this, $body);
-    }
-
-    protected function _delete($url) {
-        $this->api->client->delete($url);
-    }
-
-    protected function _update($url, $body) {
-        $this->api->client->put($url, $body);
-    }
+    abstract public function get($resource);
+    abstract public function delete($resource);
+    abstract public function create($resource);
+    abstract public function update($resource);
 }
 
