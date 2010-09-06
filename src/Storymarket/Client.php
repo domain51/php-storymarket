@@ -45,16 +45,24 @@ class Storymarket_Client {
         return json_decode($response);
     }
 
+    private function _requestWithBody($url, $method, $body=null) {
+        $opts = array();
+        if (!empty($body)) {
+            $opts['body'] = $body;
+        }
+        return $this->request($url, $method, $opts);
+     }
+
     public function get($url) {
         return $this->request($url, 'GET');
     }
 
-    public function post($url) {
-        return $this->request($url, 'POST');
+    public function post($url, $body=null) {
+        return $this->_requestWithBody($url, 'POST', $body);
     }
 
-    public function put($url) {
-        return $this->request($url, 'PUT');
+    public function put($url, $body=null) {
+        return $this->_requestWithBody($url, 'PUT', $body);
     }
 
     public function delete($url) {

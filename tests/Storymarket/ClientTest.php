@@ -3,17 +3,23 @@
 require_once dirname(dirname(__FILE__)) . '/bootstrap.php';
 
 class Storymarket_ClientTest extends StorymarketTestCase {
-    public function assertExpectedDispatch($method) {
+    public function assertExpectedDispatch($method, $args=array()) {
         $url = '/content/' . rand(10, 20) . '/';
         $expected_return = 'some randomly generated return' . rand(1000, 2000);
 
         $client = $this->getMock('Storymarket_Client', array('request'), array($this->getMockApi()));
-        $client->expects($this->once())
-            ->method('request')
-            ->with($url, strtoupper($method))
+        $expectedArgs = array($url, strtoupper($method));
+        if (!empty($args)) {
+            $expectedArgs[] = array(
+                'body' => $args,
+            );
+        }
+        $m = $client->expects($this->once())
+            ->method('request');
+        call_user_func_array(array($m, 'with'), $expectedArgs)
             ->will($this->returnValue($expected_return));
 
-        $return = $client->$method($url);
+        $return = $client->$method($url, $args);
         $this->assertEquals($expected_return, $return);
     }
 
@@ -22,11 +28,11 @@ class Storymarket_ClientTest extends StorymarketTestCase {
     }
 
     public function test_post_dispatches_to_request_and_returns_the_result() {
-        $this->assertExpectedDispatch('post');
+        $this->assertExpectedDispatch('post', array('foo' => 'bar'));
     }
 
     public function test_put_dispatches_to_request_and_returns_the_result() {
-        $this->assertExpectedDispatch('put');
+        $this->assertExpectedDispatch('put', array('foo' => 'bar'));
     }
 
     public function test_delete_dispatches_to_request_and_returns_the_result() {
