@@ -5,6 +5,8 @@ set_include_path(
     get_include_path()
 );
 
+define('STORYMARKET_TEST_PATH', dirname(__FILE__));
+
 require 'Storymarket.php';
 
 
