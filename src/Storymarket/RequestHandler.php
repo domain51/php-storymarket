@@ -33,7 +33,7 @@ class Storymarket_RequestHandler {
         $this->api->client->put($url, $data);
     }
 
-    public function doUploadFile($url, $file) {
+    public function doFileUpload($url, $file) {
         # TODO: check for file existence,
         $data = array(
             'blob' => base64_encode(file_get_contents($file)),

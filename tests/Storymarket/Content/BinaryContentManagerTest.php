@@ -30,7 +30,7 @@ class Storymarket_Content_BinaryContentManagerTest extends StorymarketTestCase {
         $resource = $this->generateRandomResource();
         $expectedUrl = '/content/' . $this->randomUrlBit . '/' . $resource->id . '/blob/';
         $this->handler->expects($this->once())
-            ->method('doUploadFile')
+            ->method('doFileUpload')
             ->with($expectedUrl, $this->testFileLocation);
 
         $manager = $this->createContentManager();
