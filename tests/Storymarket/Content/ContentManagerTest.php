@@ -3,7 +3,6 @@
 require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/Storymarket/Base/ResourceTest.php';
 
-
 class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function setUp() {
         $this->randomUrlBit = 'rand_' . rand(10, 20);
