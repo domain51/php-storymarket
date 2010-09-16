@@ -18,9 +18,7 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
 
     protected function _buildUrl() {
         $args = func_get_args();
-        if (!empty($args)) {
-            $extra = implode('/', $args) . '/';
-        }
+        $extra = !empty($args) ? implode('/', $args) . '/' : '';
         return sprintf('/content/%s/%s', $this->_url_bit, $extra);
     }
 
