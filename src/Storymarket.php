@@ -24,6 +24,7 @@ class Storymarket {
         $this->photos = new Storymarket_Content_PhotoManager($this);
         $this->pricing = new Storymarket_Schemes_PricingSchemeManager($this);
         $this->rights = new Storymarket_Schemes_RightsSchemeManager($this);
+        $this->video = new Storymarket_Content_VideoManager($this);
     }
 }
 
