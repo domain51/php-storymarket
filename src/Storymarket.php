@@ -25,6 +25,7 @@ class Storymarket {
         $this->pricing = new Storymarket_Schemes_PricingSchemeManager($this);
         $this->rights = new Storymarket_Schemes_RightsSchemeManager($this);
         $this->video = new Storymarket_Content_VideoManager($this);
+        $this->text = new Storymarket_Content_TextManager($this);
     }
 }
 

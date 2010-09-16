@@ -14,5 +14,11 @@ class StorymarketTest extends StorymarketTestCase {
         $this->assertType('Storymarket_Content_VideoManager', $v->video);
     }
 
+    public function testHasTextProperty() {
+        $v = new Storymarket('api_key');
+        $this->assertTrue(isset($v->text));
+        $this->assertType('Storymarket_Content_TextManager', $v->text);
+    }
+
 }
 
