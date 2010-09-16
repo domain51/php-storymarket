@@ -99,9 +99,7 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         $resource = $this->getMock('Storymarket_Base_Resource', array(), array(
             $this->getManagerStub(), array()
         ));
-        $resource->expects($this->once())
-            ->method('toArray')
-            ->will($this->returnValue($randomArray));
+        $resource->id = $randomArray['id'];
 
         $manager = $this->createContentManager();
         $manager->create($resource);
@@ -146,13 +144,23 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function test_update_turns_a_resource_into_an_array_before_handling_off_to_doUpdate() {
-        $randomArray = array('id' => rand(100, 200));
+        $data = array(
+            'id' => rand(100, 200),
+            'title' => 'Some randon title: ' . rand(100, 200),
+        );
+
         $resource = $this->getMock('Storymarket_Base_Resource', array(), array(
             $this->getManagerStub(), array()
         ));
-        $resource->expects($this->once())
-            ->method('toArray')
-            ->will($this->returnValue($randomArray));
+        foreach($data as $k => $v) {
+            $resource->$k = $v;
+        }
+
+        $expectedData = $data;
+        unset($expectedData['id']);
+        $this->handler->expects($this->once())
+            ->method('doUpdate')
+            ->with($this->baseUrl . $data['id'] . '/', $expectedData);
 
         $manager = $this->createContentManager();
         $manager->update($resource);

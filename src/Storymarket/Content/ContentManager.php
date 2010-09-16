@@ -5,6 +5,13 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     public $_resourceClass = 'Storymarket_Base_Resource';
     public $_handler = null;
     public $_url_bit = null;
+    public $_flattenFields = array(
+        'category',
+        'author',
+        'title',
+        'org',
+        'tags',
+    );
 
     public function __construct($api, $handler=null, $url_bit=null) {
         parent::__construct($api);
@@ -35,14 +42,30 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     }
 
     public function create($resource) {
-        $data = method_exists($resource, 'toArray') ? $resource->toArray() : $resource;
+        $data = $this->toArray($resource);
         return $this->_handler->doCreate($this->_buildUrl(), $data);
     }
 
     public function update($resource, $data=null) {
         if (is_null($data)) {
-            $data = method_exists($resource, 'toArray') ? $resource->toArray() : $resource;
+            $data = $resource;
         }
-        return $this->_handler->doUpdate($this->_buildUrl($data['id']), $data);
+        $resourceId = is_array($resource) ? $resource['id'] : $resource->id;
+        $data = $this->toArray($data);
+        return $this->_handler->doUpdate($this->_buildUrl($resourceId), $data);
+    }
+
+    public function toArray($resource) {
+        if (is_subclass_of($resource, 'Storymarket_Base_Resource')) {
+            $data = array();
+            foreach ($this->_flattenFields as $k) {
+                if (!empty($resource->$k)) {
+                    $data[$k] = $resource->$k;
+                }
+            }
+        } else {
+            $data = $resource;
+        }
+        return $data;
     }
 }
