@@ -69,6 +69,14 @@ class StorymarketContentManagerTests extends StorymarketTestCase {
             'Storymarket_Content_ContentManager');
     }
 
+    public function testHasExpectedUrlbit() {
+        $explodedClass = explode('_', $this->classBeingTested);
+        $expectedUrlbit = strtolower(str_replace('Manager', '', array_pop($explodedClass)));
+
+        $manager = new $this->classBeingTested($this->getMockApi());
+        $this->assertEquals($expectedUrlbit, $manager->_url_bit);
+    }
+
 }
 
 class StorymarketBinaryContentManagerTests extends StorymarketContentManagerTests {
