@@ -41,8 +41,10 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
         return $this->_handler->doCreate($this->_buildUrl(), $data);
     }
 
-    public function update($resource) {
-        $data = method_exists($resource, 'toArray') ? $resource->toArray() : $resource;
+    public function update($resource, $data=null) {
+        if (is_null($data)) {
+            $data = method_exists($resource, 'toArray') ? $resource->toArray() : $resource;
+        }
         return $this->_handler->doUpdate($this->_buildUrl($data['id']), $data);
     }
 }

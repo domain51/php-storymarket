@@ -126,6 +126,25 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         $manager->update($resource);
     }
 
+    public function test_update_uses_provided_data_if_available() {
+        $data = array(
+            'id' => 'foo',
+            'random' => rand(100, 200),
+        );
+
+        $resource = array(
+            'id' => 'foo',
+            'random' => rand(2000, 3000),
+        );
+
+        $this->handler->expects($this->once())
+            ->method('doUpdate')
+            ->with($this->baseUrl . $resource['id'] . '/', $data);
+
+        $manager = $this->createContentManager();
+        $manager->update($resource, $data);
+    }
+
     public function test_update_turns_a_resource_into_an_array_before_handling_off_to_doUpdate() {
         $randomArray = array('id' => rand(100, 200));
         $resource = $this->getMock('Storymarket_Base_Resource', array(), array(
