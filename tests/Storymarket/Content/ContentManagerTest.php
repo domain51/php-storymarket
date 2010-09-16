@@ -45,6 +45,11 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         call_user_func_array(array($manager, $method), $args);
     }
 
+    public function test_creates_own_request_handler_if_none_provided() {
+        $manager = new Storymarket_Content_ContentManager($this->api);
+        $this->assertType('Storymarket_RequestHandler', $manager->_handler);
+    }
+
     public function test_all_dispatches_to_doList() {
         $this->assertMethodDispatchesAsExpected('all', 'doList');
     }
