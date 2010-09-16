@@ -1,9 +1,10 @@
 <?php
 
 class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
-    protected $_api = null;
-    protected $_resourceClass = 'Storymarket_Base_Resource';
-    protected $_url_bit = null;
+    public $_api = null;
+    public $_resourceClass = 'Storymarket_Base_Resource';
+    public $_handler = null;
+    public $_url_bit = null;
 
     public function __construct($api, $handler=null, $url_bit=null) {
         parent::__construct($api);
