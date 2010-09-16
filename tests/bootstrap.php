@@ -54,3 +54,27 @@ class StorymarketBinaryContentStubTests extends StorymarketContentStubTests {
     public $expectedSubclass = 'Storymarket_Content_BinaryContentResource';
 }
 
+class StorymarketContentManagerTests extends StorymarketTestCase {
+    public function setUp() {
+        $this->classBeingTested = str_replace('Test', '', get_class($this));
+    }
+
+    public function testIsAvailable() {
+        $this->assertClassAvailable($this->classBeingTested);
+    }
+
+    public function testIsAContentManager() {
+        $this->assertSubclassOf(
+            $this->classBeingTested,
+            'Storymarket_Content_ContentManager');
+    }
+
+}
+
+class StorymarketBinaryContentManagerTests extends StorymarketContentManagerTests {
+    public function testIsABinaryContentManager() {
+        $this->assertSubclassOf(
+            $this->classBeingTested,
+            'Storymarket_Content_BinaryContentManager');
+    }
+}

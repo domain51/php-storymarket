@@ -1,5 +1,5 @@
 <?php
 
-class Storymarket_Content_AudioManager {
+class Storymarket_Content_AudioManager extends Storymarket_Content_BinaryContentManager {
 }
 
