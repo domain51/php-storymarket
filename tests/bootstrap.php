@@ -25,6 +25,10 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
         return $this->getMock('Storymarket_Base_Manager', array(), array($this->getMockApi()));
     }
 
+    public function getResourceStub() {
+        return $this->getMock('Storymarket_Base_Resource', array(), array($this->getManagerStub()));
+    }
+
     public function assertClassAvailable($className) {
         $this->assertTrue(
             class_exists($className),
