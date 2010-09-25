@@ -171,6 +171,17 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
             $this->generateRandomResource()));
     }
 
+    public function assertValueConvertedToUrl($key, $expectedUrl) {
+        $mock = $this->getResourceStub();
+        $mock->id = rand(100, 200);
+        $data = array(
+            $key => $mock,
+        );
+
+        $actual = $this->createContentManager()->toArray($data);
+        $this->assertEquals(sprintf($expectedUrl, $mock->id), $actual[$key]);
+    }
+
     public function assertValueLeftAlone($key) {
         $random = rand(100, 200);
         $data = array(
@@ -186,14 +197,7 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function test_toArray_changes_org_object_to_url() {
-        $mock = $this->getResourceStub();
-        $mock->id = rand(100, 200);
-        $data = array(
-            'org' => $mock,
-        );
-
-        $actual = $this->createContentManager()->toArray($data);
-        $this->assertEquals("/orgs/{$mock->id}/", $actual['org']);
+        $this->assertValueConvertedToUrl("org", "/orgs/%d/");
     }
 
     public function test_toArray_leaves_category_alone_if_not_an_object() {
@@ -201,14 +205,15 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function test_toArray_changes_category_object_to_url() {
-        $mock = $this->getResourceStub();
-        $mock->id = rand(100, 200);
-        $data = array(
-            'category' => $mock,
-        );
+        $this->assertValueConvertedToUrl("category", "/content/sub_category/%d/");
+    }
 
-        $actual = $this->createContentManager()->toArray($data);
-        $this->assertEquals("/content/sub_category/{$mock->id}/", $actual['category']);
+    public function test_toArray_leaves_pricing_scheme_alone_if_not_an_object() {
+        $this->assertValueLeftAlone('pricing_scheme');
+    }
+
+    public function test_toArray_changes_pricing_scheme_object_to_url() {
+        $this->assertValueConvertedToUrl("pricing_scheme", "/pricing/%d/");
     }
 }
 
