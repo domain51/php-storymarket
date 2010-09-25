@@ -77,6 +77,11 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
                 continue;
             }
 
+            if (is_a($value, 'Storymarket_Content_User')) {
+                $data[$key] = $value->username;
+                continue;
+            }
+
             switch ($key) {
             case 'org':
                 $data['org'] = '/orgs/' . $value->id . '/';

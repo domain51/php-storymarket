@@ -237,5 +237,18 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         $actual = $this->createContentManager()->toArray($data);
         $this->assertEquals(implode(', ', $tags), $actual['tags']);
     }
+
+    public function test_toArray_converts_any_User_object_to_username() {
+        $username = "random-" . rand(100, 200);
+        $user = new Storymarket_Content_User(array('username' => $username));
+
+        $randomKey = 'foo-' . rand(100, 200);
+        $data = array(
+            $randomKey => $user,
+        );
+
+        $actual = $this->createContentManager()->toArray($data);
+        $this->assertEquals($username, $actual[$randomKey]);
+    }
 }
 
