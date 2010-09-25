@@ -191,5 +191,23 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         $actual = $this->createContentManager()->toArray($data);
         $this->assertEquals("/orgs/{$mock->id}/", $actual['org']);
     }
+
+    public function test_toArray_leaves_category_alone_if_not_an_object() {
+        $random = rand(100, 200);
+        $data = array('category' => $random);
+        $actual = $this->createContentManager()->toArray($data);
+        $this->assertEquals($data, $actual);
+    }
+
+    public function test_toArray_changes_category_object_to_url() {
+        $mock = $this->getResourceStub();
+        $mock->id = rand(100, 200);
+        $data = array(
+            'category' => $mock,
+        );
+
+        $actual = $this->createContentManager()->toArray($data);
+        $this->assertEquals("/content/sub_category/{$mock->id}/", $actual['category']);
+    }
 }
 
