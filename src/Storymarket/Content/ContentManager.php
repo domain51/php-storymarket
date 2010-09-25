@@ -65,6 +65,19 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
         } else {
             $data = $resource;
         }
+
+        # Now convert objects into URLs and other simplified notation
+        foreach ($data as $key => $value) {
+            if (!is_object($value)) {
+                continue;
+            }
+
+            switch ($key) {
+            case 'org':
+                $data['org'] = '/orgs/' . $value->id . '/';
+                break;
+            }
+        }
         return $data;
     }
 }
