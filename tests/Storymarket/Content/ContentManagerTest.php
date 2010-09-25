@@ -223,5 +223,19 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function test_toArray_changes_rights_scheme_object_to_url() {
         $this->assertValueConvertedToUrl("rights_scheme", "/rights/%d/");
     }
+
+    public function test_toArray_leaves_tags_alone_if_not_an_array() {
+        $this->assertValueLeftAlone('tags');
+    }
+
+    public function test_toArray_changes_tags_to_comma_separated_string() {
+        $tags = array('foo', 'bar', 'random_' . rand(100, 200));
+        $data = array(
+            'tags' => $tags,
+        );
+
+        $actual = $this->createContentManager()->toArray($data);
+        $this->assertEquals(implode(', ', $tags), $actual['tags']);
+    }
 }
 

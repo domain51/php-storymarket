@@ -68,6 +68,11 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
 
         # Now convert objects into URLs and other simplified notation
         foreach ($data as $key => $value) {
+            if ($key === 'tags' && is_array($value)) {
+                $data[$key] = implode(', ', $value);
+                continue;
+            }
+
             if (!is_object($value)) {
                 continue;
             }
