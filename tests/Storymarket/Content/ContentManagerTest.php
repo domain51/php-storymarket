@@ -171,14 +171,18 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
             $this->generateRandomResource()));
     }
 
-    public function test_toArray_leaves_org_alone_if_not_an_object() {
+    public function assertValueLeftAlone($key) {
         $random = rand(100, 200);
         $data = array(
-            'org' => $random,
+            $key => $random,
         );
 
         $actual = $this->createContentManager()->toArray($data);
-        $this->assertEquals("{$random}", $actual['org']);
+        $this->assertEquals("{$random}", $actual[$key]);
+    }
+
+    public function test_toArray_leaves_org_alone_if_not_an_object() {
+        $this->assertValueLeftAlone("org");
     }
 
     public function test_toArray_changes_org_object_to_url() {
@@ -193,10 +197,7 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     }
 
     public function test_toArray_leaves_category_alone_if_not_an_object() {
-        $random = rand(100, 200);
-        $data = array('category' => $random);
-        $actual = $this->createContentManager()->toArray($data);
-        $this->assertEquals($data, $actual);
+        $this->assertValueLeftAlone('category');
     }
 
     public function test_toArray_changes_category_object_to_url() {
