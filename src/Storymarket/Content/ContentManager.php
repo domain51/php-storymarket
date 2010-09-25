@@ -83,6 +83,10 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
             case 'pricing_scheme':
                 $data['pricing_scheme'] = "/pricing/{$value->id}/";
                 break;
+
+            case 'rights_scheme':
+                $data[$key] = "/rights/{$value->id}/";
+                break;
             }
         }
         return $data;
