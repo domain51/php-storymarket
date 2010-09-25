@@ -14,8 +14,7 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     );
 
     public function __construct($api, $handler=null, $url_bit=null) {
-        parent::__construct($api);
-        $this->_handler = empty($handler) ? new Storymarket_RequestHandler($api, $this) : $handler;
+        parent::__construct($api, $handler);
         $this->_url_bit = $url_bit;
         if (is_null($this->_url_bit)) {
             $exploded = explode('_', get_class($this));

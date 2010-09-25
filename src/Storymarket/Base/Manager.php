@@ -28,8 +28,9 @@ abstract class Storymarket_Base_Manager
      *
      * @param $api Storymarket
      */
-    public function __construct(Storymarket $api) {
+    public function __construct(Storymarket $api, $handler=null) {
         $this->_api = $api;
+        $this->_handler = empty($handler) ? new Storymarket_RequestHandler($api, $this) : $handler;
     }
 
     abstract public function all();
