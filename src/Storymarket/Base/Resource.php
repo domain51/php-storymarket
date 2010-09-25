@@ -9,7 +9,7 @@
  */
 class Storymarket_Base_Resource
 {
-    public function __construct(Storymarket_Base_Manager $manager, $info) {
+    public function __construct(Storymarket_Base_Manager $manager, $info=array()) {
         $this->manager = $manager;
         $this->_info = $info;
     }
