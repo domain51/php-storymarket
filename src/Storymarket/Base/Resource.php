@@ -9,9 +9,21 @@
  */
 class Storymarket_Base_Resource
 {
+    protected $_info = array();
+
     public function __construct(Storymarket_Base_Manager $manager, $info=array()) {
         $this->manager = $manager;
-        $this->_info = $info;
+        $this->_populate($info);
+    }
+
+    /**
+     * Internal hook for handling assigning of _info.
+     *
+     * Used in Resources that need to do any additional setup before
+     * asdsigning _info.
+     */
+    protected function _populate($info) {
+        $this->_info = array_merge($this->_info, $info);
     }
 
     public function __get($k) {
