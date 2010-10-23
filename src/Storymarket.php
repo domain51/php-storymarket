@@ -18,7 +18,7 @@ class Storymarket {
         $this->client = new Storymarket_Client($this);
 
         $this->audio = new Storymarket_Content_AudioManager($this);
-        $this->categories = new Storymarket_Content_CategoryManager($this);
+        $this->categories = new Storymarket_Categories_CategoryManager($this);
         $this->data = new Storymarket_Content_DataManager($this);
         $this->orgs = new Storymarket_Orgs_OrgManager($this);
         $this->photos = new Storymarket_Content_PhotoManager($this);
