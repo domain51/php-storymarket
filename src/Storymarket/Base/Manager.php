@@ -35,8 +35,5 @@ abstract class Storymarket_Base_Manager
 
     abstract public function all();
     abstract public function get($resource);
-    abstract public function delete($resource);
-    abstract public function create($resource);
-    abstract public function update($resource);
 }
 
