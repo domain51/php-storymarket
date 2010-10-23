@@ -1,7 +1,7 @@
 <?php
 
 class Storymarket_Links_LinkedResource extends Storymarket_Base_Resource {
-    protected function _populate($info) {
+    protected function _add_details($info) {
         $this->_info['links'] = array();
         foreach ($info as $key => $value) {
             if ($key != 'links') {
@@ -17,7 +17,7 @@ class Storymarket_Links_LinkedResource extends Storymarket_Base_Resource {
                 );
             }
         }
-        parent::_populate($info);
+        parent::_add_details($info);
     }
 }
 

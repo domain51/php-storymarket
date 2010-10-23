@@ -13,7 +13,7 @@ class Storymarket_Base_Resource
 
     public function __construct(Storymarket_Base_Manager $manager, $info=array()) {
         $this->manager = $manager;
-        $this->_populate($info);
+        $this->_add_details($info);
     }
 
     /**
@@ -22,7 +22,7 @@ class Storymarket_Base_Resource
      * Used in Resources that need to do any additional setup before
      * asdsigning _info.
      */
-    protected function _populate($info) {
+    protected function _add_details($info) {
         $this->_info = array_merge($this->_info, $info);
     }
 
