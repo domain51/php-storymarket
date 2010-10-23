@@ -42,6 +42,15 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
             "Checking that {$className} is a sub-class of {$superClass}");
     }
 
+    // TODO: move to super-class
+    public function generateRandomResource() {
+        require_once dirname(__FILE__) . '/Storymarket/Base/ResourceTest.php';
+        $data = array(
+            'id' => rand(1000, 2000),
+        );
+        return new TestableResource($this->getManagerStub(), $data);
+    }
+
 }
 
 class StorymarketContentStubTests extends StorymarketTestCase {

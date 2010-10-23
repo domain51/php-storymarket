@@ -1,7 +1,6 @@
 <?php
 
 require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
-require_once dirname(dirname(dirname(__FILE__))) . '/Storymarket/Base/ResourceTest.php';
 
 class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function setUp() {
@@ -10,14 +9,6 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
         $this->handler = $this->getMock('Storymarket_RequestHandler', array(),
             array($this->api, 'Storymarket_Base_Resource'));
         $this->baseUrl = '/content/' . $this->randomUrlBit . '/';
-    }
-
-    // TODO: move to super-class
-    public function generateRandomResource() {
-        $data = array(
-            'id' => rand(1000, 2000),
-        );
-        return new TestableResource($this->getManagerStub(), $data);
     }
 
     public function createContentManager() {
