@@ -26,5 +26,10 @@ class Storymarket_Links_LinkTest extends StorymarketTestCase {
     public function test_casting_to_string_converts_to_href() {
         $this->assertEquals($this->randomHref, (string)$this->link);
     }
+
+    public function test_allowedMethods_accessible_with_underscore_in_addition_to_camelCase() {
+        $this->assertEquals($this->randomAllowedMethods, $this->link->allowed_methods);
+        $this->assertEquals($this->link->allowedMethods, $this->link->allowed_methods);
+    }
 }
 
