@@ -42,6 +42,14 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
             "Checking that {$className} is a sub-class of {$superClass}");
     }
 
+    public function assertAttributeExists($obj, $attr) {
+        $this->assertTrue(isset($obj->$attr));
+    }
+
+    public function assertAttributeDoesNotExist($obj, $attr) {
+        $this->assertFalse(isset($obj->$attr));
+    }
+
     // TODO: move to super-class
     public function generateRandomResource() {
         require_once dirname(__FILE__) . '/Storymarket/Base/ResourceTest.php';
@@ -54,7 +62,7 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
 }
 
 class StorymarketContentStubTests extends StorymarketTestCase {
-    public $expectedSubclass = 'Storymarket_Base_Resource';
+    public $expectedSubclass = 'Storymarket_Content_Resource';
     public function test() {
         $className = 'Storymarket_Content_' . $this->type;
 

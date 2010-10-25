@@ -13,7 +13,7 @@ abstract class Storymarket_Base_Manager
      *
      * @var $_api Storymarket
      */
-    protected $_api = null;
+    public $_api = null;
 
     /**
      * Should be overriden by sub-classes to provide the specific resource
