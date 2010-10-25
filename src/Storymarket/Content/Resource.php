@@ -20,6 +20,10 @@ class Storymarket_Content_Resource extends Storymarket_Base_Resource {
         case 'org':
             return new Storymarket_Orgs_Org($this->manager->_api->orgs, $data);
             break;
+
+        case 'pricingScheme':
+        case 'pricing_scheme':
+            return new Storymarket_Schemes_PricingScheme($this->manager->_api->pricing, $data);
         }
         return $data;
     }

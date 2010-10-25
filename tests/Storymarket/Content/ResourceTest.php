@@ -111,7 +111,6 @@ class Storymarket_Content_ResourceTest extends Storymarket_Base_ResourceTest {
     public function test_pricingScheme_returns_a_PricingScheme_object_if_present_in_data() {
         list($randomScheme, $resource) = $this->generateResourceWithRandomPricingScheme();
 
-        $this->markTestIncomplete('need to implement PricingScheme object');
         $this->assertType(Storymarket_Schemes_PricingScheme, $resource->pricingScheme);
         $this->assertType(Storymarket_Schemes_PricingSchemeManager, $resource->pricingScheme->manager);
         $this->assertEquals($randomScheme, $resource->pricingScheme->random);
