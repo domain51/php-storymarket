@@ -62,17 +62,27 @@ class StorymarketTestCase extends PHPUnit_Framework_TestCase
 }
 
 class StorymarketContentStubTests extends StorymarketTestCase {
-    public $expectedSubclass = 'Storymarket_Content_Resource';
+    public $expectedSubclasses = array();
+
+    public function setUp() {
+        $this->expectedSubclasses[] = 'Storymarket_Content_Resource';
+    }
+
     public function test() {
         $className = 'Storymarket_Content_' . $this->type;
 
         $this->assertClassAvailable($className);
-        $this->assertSubclassOf($className, $this->expectedSubclass);
+        foreach ($this->expectedSubclasses as $expectedSubclass) {
+            $this->assertSubclassOf($className, $expectedSubclass);
+        }
     }
 }
 
 class StorymarketBinaryContentStubTests extends StorymarketContentStubTests {
-    public $expectedSubclass = 'Storymarket_Content_BinaryContentResource';
+    public function setUp() {
+        parent::setUp();
+        $this->expectedSubclasses[] = 'Storymarket_Content_BinaryContentResource';
+    }
 }
 
 class StorymarketContentManagerTests extends StorymarketTestCase {
