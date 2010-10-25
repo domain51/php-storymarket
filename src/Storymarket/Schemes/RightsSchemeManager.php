@@ -1,5 +1,5 @@
 <?php
 
-class Storymarket_Schemes_RightsSchemeManager {
+class Storymarket_Schemes_RightsSchemeManager extends Storymarket_Schemes_BaseSchemeManager {
 }
 

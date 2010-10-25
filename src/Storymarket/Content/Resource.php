@@ -24,6 +24,13 @@ class Storymarket_Content_Resource extends Storymarket_Base_Resource {
         case 'pricingScheme':
         case 'pricing_scheme':
             return new Storymarket_Schemes_PricingScheme($this->manager->_api->pricing, $data);
+            break;
+
+        case 'rightsScheme':
+        case 'rights_scheme':
+            return new Storymarket_Schemes_RightsScheme($this->manager->_api->rights, $data);
+            break;
+
         }
         return $data;
     }

@@ -151,7 +151,6 @@ class Storymarket_Content_ResourceTest extends Storymarket_Base_ResourceTest {
     public function test_rightsScheme_returns_a_RightsScheme_object_if_present_in_data() {
         list($randomScheme, $resource) = $this->generateResourceWithRandomRightsScheme();
 
-        $this->markTestIncomplete('need to implement RightsScheme object');
         $this->assertType(Storymarket_Schemes_RightsScheme, $resource->rightsScheme);
         $this->assertType(Storymarket_Schemes_RightsSchemeManager, $resource->rightsScheme->manager);
         $this->assertEquals($randomScheme, $resource->rightsScheme->random);
