@@ -191,4 +191,28 @@ class Storymarket_Content_ResourceTest extends Storymarket_Base_ResourceTest {
         list($randomAuthor, $resource) = $this->generateResourceWithRandomUploadedBy();
         $this->assertEquals($resource->uploadedBy, $resource->uploaded_by);
     }
+
+    public function test_save_dispatches_to_provided_managers_update() {
+        $manager = $this->getMock(Storymarket_Content_ContentManager, array(),
+            array($this->getMockApi())
+        );
+        $resource = new Storymarket_Content_Resource($manager, array());
+        $manager->expects($this->once())
+            ->method('update')
+            ->with($resource);
+
+        $resource->save();
+    }
+
+    public function test_delete_dispatches_to_provided_managers_delete() {
+        $manager = $this->getMock(Storymarket_Content_ContentManager, array(),
+            array($this->getMockApi())
+        );
+        $resource = new Storymarket_Content_Resource($manager, array());
+        $manager->expects($this->once())
+            ->method('delete')
+            ->with($resource);
+
+        $resource->delete();
+    }
 }

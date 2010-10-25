@@ -32,4 +32,12 @@ class Storymarket_Content_Resource extends Storymarket_Base_Resource {
         );
         return in_array($key, $acceptable);
     }
+
+    public function save() {
+        $this->manager->update($this);
+    }
+
+    public function delete() {
+        $this->manager->delete($this);
+    }
 }
