@@ -27,6 +27,9 @@ class Storymarket_Base_Resource
     }
 
     public function __get($k) {
+        if (preg_match('/[A-Z]/', $k)) {
+            $k = strtolower(implode('_', preg_split('/(?<=\\w)(?=[A-Z])/', $k)));
+        }
         if (!isset($this->_info[$k])) {
             return null;
         }
