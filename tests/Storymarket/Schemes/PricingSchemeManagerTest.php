@@ -4,6 +4,8 @@ require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 
 class Storymarket_Schemes_PricingSchemeManagerTest extends
     Storymarket_Schemes_BaseSchemeManagerTest {
+    public $baseUrl = '/pricing/';
+
     public function test_specifies_PricingScheme_as_its_resourceClass() {
         $manager = new Storymarket_Schemes_PricingSchemeManager($this->getMockApi());
         $this->assertEquals('Storymarket_Schemes_PricingScheme', $manager->_resourceClass);
