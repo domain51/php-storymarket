@@ -4,7 +4,7 @@ require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 
 class Storymarket_Content_ResourceTest extends Storymarket_Base_ResourceTest {
     public function assertAttributeExists($attr) {
-        $resource = new Storymarket_Content_Resource($this->getManagerStub(), array());
+        $resource = $this->generateResource();
         parent::assertAttributeExists($resource, $attr);
     }
 
