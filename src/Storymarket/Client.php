@@ -25,11 +25,16 @@ class Storymarket_Client {
         $opts['headers']['User-Agent'] = $this->userAgent;
         $opts['headers']['Authorization'] = $this->api->api_key;
 
+        $headers = array();
+        foreach ($opts['headers'] as $k => $v) {
+            $headers[] = "{$k}: {$v}";
+        }
+
         $c = curl_init();
         curl_setopt_array($c, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => $opts['headers'],
+            CURLOPT_HTTPHEADER => $headers,
             CURLOPT_POST => $method == 'POST',
         ));
         if (isset($opts['body'])) {
