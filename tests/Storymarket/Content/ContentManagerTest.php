@@ -55,6 +55,12 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
             array($this->baseUrl . $resource->id . '/'), array($resource));
     }
 
+    public function test_get_dispatches_to_doGet_with_id() {
+        $id = rand(1000, 2000);
+        $this->assertMethodDispatchesAsExpected('get', 'doGet',
+            array($this->baseUrl . $id . '/'), array($id));
+    }
+
     public function test_get_returns_doGet_result() {
         $this->assertMethodReturnsAsExpected('get', 'doGet', array(
             $this->generateRandomResource()));

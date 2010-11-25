@@ -38,7 +38,8 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     }
 
     public function get($resource) {
-        return $this->_handler->doGet($this->_buildUrl($resource->id));
+        $id = is_object($resource) ? $resource->id : $resource;
+        return $this->_handler->doGet($this->_buildUrl($id));
     }
 
     public function delete($resource) {

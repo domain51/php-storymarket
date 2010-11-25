@@ -40,7 +40,7 @@ class Storymarket_Categories_CategoryManagerTest extends StorymarketTestCase {
         $this->assertEquals($randomValue, $result);
     }
 
-    public function test_get_requests_slash_orgs_slash_resource_id() {
+    public function test_get_requests_slash_content_slash_category_slash_resource_id() {
         $resource = $this->generateRandomResource();
         $this->handler->expects($this->once())
             ->method('doGet')
@@ -48,6 +48,16 @@ class Storymarket_Categories_CategoryManagerTest extends StorymarketTestCase {
 
         $manager = new Storymarket_Categories_CategoryManager($this->api, $this->handler);
         $manager->get($resource);
+    }
+
+    public function test_get_requests_slash_content_slash_category_slash_id() {
+        $id = rand(1000, 2000);
+        $this->handler->expects($this->once())
+            ->method('doGet')
+            ->with("/content/category/{$id}/");
+
+        $manager = new Storymarket_Categories_CategoryManager($this->api, $this->handler);
+        $manager->get($id);
     }
 
     public function test_get_returns_value_from_handler() {
