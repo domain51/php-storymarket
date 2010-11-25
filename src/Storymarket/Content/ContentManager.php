@@ -2,7 +2,7 @@
 
 class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     public $_api = null;
-    public $_resourceClass = null;
+    public $resourceClass = null;
     public $_handler = null;
     public $_url_bit = null;
     public $_flattenFields = array(
@@ -22,8 +22,8 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
             $this->_url_bit = strtolower(str_replace('Manager', '', array_pop($exploded)));
         }
 
-        if (empty($this->_resourceClass)) {
-            $this->_resourceClass = substr($className, 0, -7);
+        if (empty($this->resourceClass)) {
+            $this->resourceClass = substr($className, 0, -7);
         }
     }
 

@@ -111,7 +111,7 @@ class StorymarketContentManagerTests extends StorymarketTestCase {
     public function testHasExpectedResourceClass() {
         $expectedResourceClass = str_replace('Manager', '', $this->classBeingTested);
         $manager = new $this->classBeingTested($this->getMockApi());
-        $this->assertEquals($expectedResourceClass, $manager->_resourceClass);
+        $this->assertEquals($expectedResourceClass, $manager->resourceClass);
     }
 
 }
