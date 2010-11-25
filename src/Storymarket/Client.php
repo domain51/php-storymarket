@@ -47,7 +47,7 @@ class Storymarket_Client {
             throw Storymarket_Exceptions::fromResponse($status, $response);
         }
         # TODO: should return all headers in addition to body
-        return json_decode($response);
+        return json_decode($response, true);
     }
 
     private function _requestWithBody($url, $method, $body=null) {
