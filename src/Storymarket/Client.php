@@ -43,7 +43,7 @@ class Storymarket_Client {
 
         $response = curl_exec($c);
         $status = curl_getinfo($c, CURLINFO_HTTP_CODE);
-        if (in_array($status, array(400, 401, 403, 404, 405, 406, 413, 500))) {
+        if (in_array($status, array(400, 401, 403, 404, 405, 406, 410, 413, 500))) {
             throw Storymarket_Exceptions::fromResponse($status, $response);
         }
         # TODO: should return all headers in addition to body
