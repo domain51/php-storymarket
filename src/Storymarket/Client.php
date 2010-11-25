@@ -38,7 +38,7 @@ class Storymarket_Client {
             CURLOPT_POST => $method == 'POST',
         ));
         if (isset($opts['body'])) {
-            curl_setopt(CURLOPT_POSTFIELDS, $opts['body']);
+            curl_setopt($c, CURLOPT_POSTFIELDS, $opts['body']);
         }
 
         $response = curl_exec($c);
