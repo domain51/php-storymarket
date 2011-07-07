@@ -7,6 +7,7 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
     public $_url_bit = null;
     public $_flattenFields = array(
         'category',
+        'sub_type',
         'author',
         'title',
         'org',
@@ -94,6 +95,9 @@ class Storymarket_Content_ContentManager extends Storymarket_Base_Manager {
                 break;
             case 'category':
                 $data['category'] = "/content/sub_category/{$value->id}/";
+                break;
+            case 'sub_type':
+                $data['sub_type'] = "/content/sub_type/{$value->id}/";
                 break;
 
             case 'pricing_scheme':

@@ -8,7 +8,7 @@ function _storymarket_autoloader($class) {
 spl_autoload_register(_storymarket_autoloader);
 
 class Storymarket {
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.1';
 
     public $api_key = null;
     public $client = null;
@@ -19,6 +19,7 @@ class Storymarket {
 
         $this->audio = new Storymarket_Content_AudioManager($this);
         $this->categories = new Storymarket_Categories_CategoryManager($this);
+        $this->sub_types = new Storymarket_SubTypes_SubTypeManager($this);
         $this->data = new Storymarket_Content_DataManager($this);
         $this->orgs = new Storymarket_Orgs_OrgManager($this);
         $this->photos = new Storymarket_Content_PhotoManager($this);

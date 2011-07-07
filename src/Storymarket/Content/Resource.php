@@ -17,6 +17,10 @@ class Storymarket_Content_Resource extends Storymarket_Base_Resource {
             return new Storymarket_Categories_Category($this->manager->_api->categories, $data);
             break;
 
+        case 'sub_type':
+            return new Storymarket_SubTypes_SubType($this->manager->_api->sub_types, $data);
+            break;
+
         case 'org':
             return new Storymarket_Orgs_Org($this->manager->_api->orgs, $data);
             break;
@@ -36,7 +40,7 @@ class Storymarket_Content_Resource extends Storymarket_Base_Resource {
     }
 
     public function __isset($key) {
-        $acceptable = array('author', 'category', 'org',
+        $acceptable = array('author', 'category', 'sub_type','org',
             'pricing_scheme', 'pricingScheme',
             'rights_scheme', 'rightsScheme',
             'uploaded_by', 'uploadedBy',
