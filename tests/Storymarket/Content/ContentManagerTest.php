@@ -204,6 +204,13 @@ class Storymarket_Content_ContentManagerTest extends StorymarketTestCase {
     public function test_toArray_changes_category_object_to_url() {
         $this->assertValueConvertedToUrl("category", "/content/sub_category/%d/");
     }
+    public function test_toArray_leaves_subtype_alone_if_not_an_object() {
+        $this->assertValueLeftAlone('sub_type');
+    }
+
+    public function test_toArray_changes_subtype_object_to_url() {
+        $this->assertValueConvertedToUrl("sub_type", "/content/sub_type/%d/");
+    }
 
     public function test_toArray_leaves_pricing_scheme_alone_if_not_an_object() {
         $this->assertValueLeftAlone('pricing_scheme');
