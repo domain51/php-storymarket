@@ -69,6 +69,27 @@ class Storymarket_Content_ResourceTest extends Storymarket_Base_ResourceTest {
         $this->assertEquals($randomCategory, $resource->category->random);
     }
 
+    public function test_has_a_subtype_attribute() {
+        $this->assertAttributeExists('sub_type');
+    }
+
+    public function test_subtype_attribute_is_null_by_default() {
+        $this->assertNull($this->generateResource()->sub_type);
+    }
+
+    public function test_subtype_returns_a_SubType_object_for_subtype_if_present_in_data() {
+        $randomSubType = 'sub_type-' . rand(100, 200);
+        $resource = $this->generateResource(array(
+            'sub_type' => array(
+                'random' => $randomSubType,
+            ),
+        ));
+
+        $this->assertType(Storymarket_SubTypes_SubType, $resource->sub_type);
+        $this->assertType(Storymarket_SubTypes_SubTypeManager, $resource->sub_type->manager);
+        $this->assertEquals($randomSubType, $resource->sub_type->random);
+    }
+
     public function test_has_an_org_attribute() {
         $this->assertAttributeExists('org');
     }
